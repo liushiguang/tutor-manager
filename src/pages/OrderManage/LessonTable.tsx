@@ -1,106 +1,40 @@
 import { useState, useEffect } from 'react';
 import axiosInstance from '@/apis/axiosConfig';
 import classNames from 'classnames';
-import { tutor } from '@/types/tutor';
+import { lesson } from '@/types/lesson';
 
 const EditForm = (props: any) => {
-  const { tutor, onChange, onSave, onCancel } = props
+  const { lesson, onChange, onSave, onCancel } = props
 
   return (
           <div className='fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-50'>
             <div 
               className="w-[22%] border border-gray-300 rounded-2xl p-6 bg-white shadow-md">
-              <h2 className="text-center text-2xl font-semibold mb-4">Edit Tutor Info</h2>
+              <h2 className="text-center text-2xl font-semibold mb-4">Edit Lesson Info</h2>
               <form className="space-y-4">
-                  <div className="flex flex-col">
-                      <label htmlFor="title" className="font-semibold">Title:</label>
-                      <input 
-                          type='text' 
-                          id='title' 
-                          name='title' 
-                          value={tutor.title}
-                          onChange={onChange}
-                          className="border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
-                      />
-                  </div>
-                  <div className="flex flex-col">
-                      <label htmlFor="content" className="font-semibold">Content:</label>
-                      <input 
-                          type='text' 
-                          id='content' 
-                          name='content' 
-                          value={tutor.content}
-                          onChange={onChange}
-                          className="border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
-                      />
-                  </div>
-                  <div className="flex flex-col">
-                      <label htmlFor="address" className="font-semibold">Address:</label>
-                      <input 
-                          type='text' 
-                          id='address' 
-                          name='address' 
-                          value={tutor.address}
-                          onChange={onChange}
-                          className="border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
-                      />
-                  </div>
-                  <div className="flex flex-col">
-                      <label htmlFor="subject" className="font-semibold">Subject:</label>
-                      <input 
-                          type='text' 
-                          id='subject' 
-                          name='subject' 
-                          value={tutor.subject}
-                          onChange={onChange}
-                          className="border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
-                      />
-                  </div>
-                  <div className="flex flex-col">
-                      <label htmlFor="level" className="font-semibold">Level:</label>
-                      <input 
-                          type='text' 
-                          id='level' 
-                          name='level' 
-                          value={tutor.level}
-                          onChange={onChange}
-                          className="border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
-                      />
-                  </div>
-                  <div className="flex flex-col">
-                      <label htmlFor="duration" className="font-semibold">Duration:</label>
-                      <input 
-                          type='text' 
-                          id='duration' 
-                          name='duration' 
-                          value={tutor.duration}
-                          onChange={onChange}
-                          className="border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
-                      />
-                  </div>
-                  <div className="flex flex-col">
-                      <label htmlFor="lessons" className="font-semibold">Lessons:</label>
-                      <input
-                          type='text'
-                          id='lessons' 
-                          name='lessons' 
-                          value={tutor.lessons}
-                          onChange={onChange}
-                          className="border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500">
-                      </input>
-                  </div>
-                  <div className="flex flex-col">
-                      <label htmlFor="price" className="font-semibold">Price:</label>
-                      <input
-                          type='text'
-                          id='price' 
-                          name='price' 
-                          value={tutor.price}
-                          onChange={onChange}
-                          className="border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500">
-                      </input>
-                  </div>
-                  <div className="flex justify-center space-x-4">
+                    <div className="flex flex-col">
+                        <label htmlFor="subject" className="font-semibold">Subject:</label>
+                        <input 
+                            type='text' 
+                            id='subject' 
+                            name='subject' 
+                            value={lesson.subject}
+                            onChange={onChange}
+                            className="border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+                        />
+                    </div>
+                    <div className="flex flex-col">
+                        <label htmlFor="location" className="font-semibold">Location:</label>
+                        <input 
+                            type='text' 
+                            id='location' 
+                            name='location' 
+                            value={lesson.location}
+                            onChange={onChange}
+                            className="border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+                        />
+                    </div>
+                    <div className="flex justify-center space-x-4">
                       <button 
                           onClick={onCancel}
                           className="glass py-2 px-6 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition duration-300">
@@ -111,7 +45,7 @@ const EditForm = (props: any) => {
                           className="glass py-2 px-6 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-300">
                           保存
                       </button>
-                  </div>
+                    </div>
               </form>
             </div>
           </div>
@@ -120,42 +54,37 @@ const EditForm = (props: any) => {
 
 const LessonTable = (props : any)=> {
   const { perPage } = props
-  const iniTutor: tutor = {
+  const iniLesson: lesson = {
     id: 0,
-    uid: 0,
-    username: "",
-    title: "",
-    content: "",
-    address: "",
     subject: "",
-    level: 0,
-    date: "",
-    duration: "",
-    lessons: 0,
-    price: 0,
+    time: "",
+    location: "",
+    studentName: "",
+    studentUid: 0,
+    tuid: 0
   }
 
   const [searchTerm, setSearchTerm] = useState("")
-  const [tutors, setTutors] = useState<tutor[]>([])
+  const [lessons, setLessons] = useState<lesson[]>([])
   const [currentPage, setCurrentPage] = useState(1)
-  const [tutorsPerPage] = useState(perPage)
+  const [lessonsPerPage] = useState(perPage)
   const [isEditing, setIsEditing] = useState(false)
-  const [editingTutor, setEditingTutor] = useState<tutor>(iniTutor)
+  const [editingLesson, setEditingLesson] = useState<lesson>(iniLesson)
 
-  // 获取家教需求信息,并设置tutors数组,以显示在页面上,依赖于currentPage和tutorsPerPage
+  // 获取课程信息,并设置lessons数组,以显示在页面上,依赖于currentPage和lessonsPerPage
   useEffect(() => {
-    const fetchTutors = async () => {
-      const response = await axiosInstance.get('/tutor/infos')
+    const fetchLessons = async () => {
+      const response = await axiosInstance.get('/lesson/infos')
       
-      const responseTutors = response.data.data
-      setTutors(responseTutors)
+      const responseLessons = response.data.data
+      setLessons(responseLessons)
     }
 
-    fetchTutors();
-  }, [currentPage, tutorsPerPage])
+    fetchLessons();
+  }, [currentPage, lessonsPerPage])
 
   // 计算总页数
-  const totalPages = Math.ceil(tutors.length / tutorsPerPage)
+  const totalPages = Math.ceil(lessons.length / lessonsPerPage)
 
   // 分页逻辑: 点击页码按钮,则设置currentPage为该页码
   const handlePageChange = (page: number) => {
@@ -180,18 +109,18 @@ const LessonTable = (props : any)=> {
     setSearchTerm(value)
   }
 
-  const handleSearch = (username: string) => {
-    const searchedTutors = tutors.filter((item: tutor) => item.username === username)
-    setTutors(searchedTutors)
+  const handleSearch = (studentName: string) => {
+    const searchedLessons = lessons.filter((item: lesson) => item.studentName === studentName)
+    setLessons(searchedLessons)
   }
 
-  const handleEditTutor = (ctutor: tutor) => {
-    setEditingTutor(ctutor) //设置正在编辑的家教需求信息
+  const handleEditLesson = (clesson: lesson) => {
+    setEditingLesson(clesson) //设置正在编辑的课程信息
     setIsEditing(true) // 显示编辑框
   }
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEditingTutor({...editingTutor, [event.target.name]: event.target.value})
+    setEditingLesson({...editingLesson, [event.target.name]: event.target.value})
   }
 
   // 取消编辑
@@ -200,12 +129,12 @@ const LessonTable = (props : any)=> {
   }
 
   // 保存编辑
-  const handleSaveTutor = async () => {
-    // 发送Put请求到后端API，以更新家教需求的信息
-    const response = await axiosInstance.put(`/tutor/info`, editingTutor)
-    // 如果请求成功，则更新currentTutors数组
+  const handleSaveLesson = async () => {
+    // 发送Put请求到后端API，以更新课程的信息
+    const response = await axiosInstance.put(`/lesson/info`, editingLesson)
+    // 如果请求成功，则更新currentLessons数组
     if (response.data.code === 200) {
-      setTutors(tutors.map((item: tutor) => item.id === editingTutor.id ? editingTutor : item))
+      setLessons(lessons.map((item: lesson) => item.id === editingLesson.id ? editingLesson : item))
     }
     // 关闭编辑框
     setIsEditing(false)
@@ -216,7 +145,7 @@ const LessonTable = (props : any)=> {
           <div className='w-full flex flex-row'>
             <input
                 type="text"
-                placeholder="Search Tutors"
+                placeholder="Search Lessons"
                 value={searchTerm}
                 onChange={(event)=>handleSearchTerm(event.target.value)}
                 className="basis-[85%] px-4 py-2 border-2 border-gray-300 rounded-md focus:outline-none hover:border-blue-500"
@@ -231,38 +160,28 @@ const LessonTable = (props : any)=> {
           <table className="w-full mt-4 bg-white shadow-md rounded-lg overflow-hidden font-sans">
             <thead className='bg-gray-200'>
               <tr>
-              <th className='border border-gray-400 px-4 py-2 text-lg'>User Name</th>
-              <th className='border border-gray-400 px-4 py-2 text-lg'>Title</th>
-              <th className='border border-gray-400 px-4 py-2 text-lg'>Content</th>
-              <th className='border border-gray-400 px-4 py-2 text-lg'>Address</th>
               <th className='border border-gray-400 px-4 py-2 text-lg'>Subject</th>
-              <th className='border border-gray-400 px-4 py-2 text-lg'>Level</th>
-              <th className='border border-gray-400 px-4 py-2 text-lg'>Duration</th>
-              <th className='border border-gray-400 px-4 py-2 text-lg'>Lessons</th>
-              <th className='border border-gray-400 px-4 py-2 text-lg'>Price</th>
+              <th className='border border-gray-400 px-4 py-2 text-lg'>Location</th>
+              <th className='border border-gray-400 px-4 py-2 text-lg'>Student</th>
+              <th className='border border-gray-400 px-4 py-2 text-lg'>Teacher</th>
               <th className='border border-gray-400 px-4 py-2 text-lg'>Process</th>
               </tr>
             </thead>
             <tbody>
-              {/* 显示当前页的家教需求信息 */}
+              {/* 显示当前页的课程信息 */}
               {
-                tutors
-                .slice((currentPage - 1) * tutorsPerPage, currentPage * tutorsPerPage)
-                .map((item: tutor) => (
+                lessons
+                .slice((currentPage - 1) * lessonsPerPage, currentPage * lessonsPerPage)
+                .map((item: lesson) => (
                   <tr key={item.id} className='font-sans text-lg hover:bg-gray-400/25 duration-200'>
-                    <td className='border border-gray-400 px-4 py-2 text-center'>{item.username}</td>
-                    <td className='border border-gray-400 px-4 py-2 text-center'>{item.title}</td>
-                    <td className='border border-gray-400 px-4 py-2 text-center'>{item.content}</td>
-                    <td className='border border-gray-400 px-4 py-2 text-center'>{item.address}</td>
                     <td className='border border-gray-400 px-4 py-2 text-center'>{item.subject}</td>
-                    <td className='border border-gray-400 px-4 py-2 text-center'>{item.level}</td>
-                    <td className='border border-gray-400 px-4 py-2 text-center'>{item.duration}</td>
-                    <td className='border border-gray-400 px-4 py-2 text-center'>{item.lessons}</td>
-                    <td className='border border-gray-400 px-4 py-2 text-center'>{item.price}</td>
+                    <td className='border border-gray-400 px-4 py-2 text-center'>{item.location}</td>
+                    <td className='border border-gray-400 px-4 py-2 text-center'>{item.studentName}</td>
+                    <td className='border border-gray-400 px-4 py-2 text-center'>{item.tuid}</td>
                     <td className='border border-gray-400 px-4 py-2'>
                       <div className='flex flex-row justify-evenly space-x-2'>
                         <button 
-                              onClick={() => handleEditTutor(item)}
+                              onClick={() => handleEditLesson(item)}
                               className="py-2 px-6 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-300 transform hover:scale-105 focus:outline-none">
                               编辑
                           </button>
@@ -275,7 +194,7 @@ const LessonTable = (props : any)=> {
             <tfoot>
               {/* 分页按钮 */}
               <tr>
-                <td colSpan={10} className='p-2'>
+                <td colSpan={5} className='p-2'>
                   <div className='w-full flex flex-row justify-center space-x-4'>
                     <button 
                       className='py-1 px-3 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-300'
@@ -294,7 +213,7 @@ const LessonTable = (props : any)=> {
             </tfoot>
           </table>
           {
-            isEditing && <EditForm tutor={editingTutor} onChange={handleInputChange} onSave={handleSaveTutor} onCancel={handleCancelEdit}/>         
+            isEditing && <EditForm lesson={editingLesson} onChange={handleInputChange} onSave={handleSaveLesson} onCancel={handleCancelEdit}/>         
           }
     </div>
   )

@@ -4,6 +4,6 @@ export interface lesson {
     time: string,
     location: string,
     studentName: string,
-    studentId: number,
-    tId: number
+    studentUid: number,
+    tuid: number
 }

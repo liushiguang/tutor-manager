@@ -255,19 +255,19 @@ const UserManage = () => {
         <div className="bg-white rounded shadow">
           <div role="tablist" className="tabs tabs-lifted">
             <input type="radio" name="my_tabs_1" id="tab1" role="tab" 
-                className="tab font-sans font-bold text-base" aria-label="SignOn Table" defaultChecked />
+                className="tab font-mono font-semibold text-lg" aria-label="SignOn Table" defaultChecked />
             <div role="tabpanel" className="tab-content p-4">
               <SignOnTable perPage={perPage}/>
             </div>
   
             <input type="radio" name="my_tabs_1" id="tab2" role="tab" 
-                className="tab font-sans font-bold text-base" aria-label="Teacher Table" />
+                className="tab font-mono font-semibold text-lg" aria-label="Teacher Table" />
             <div role="tabpanel" className="tab-content p-4 hidden">
               <TeacherInfoTable perPage={perPage}/>
             </div>
 
             <input type="radio" name="my_tabs_1" id="tab3" role="tab" 
-                className="tab font-sans font-bold text-base" aria-label="User Table" />
+                className="tab font-mono font-semibold text-lg" aria-label="User Table" />
             <div role="tabpanel" className="tab-content p-4 hidden">
               <UserInfoTable perPage={perPage}/>
             </div>
