@@ -7,6 +7,7 @@ import OrderManage from '@/pages/OrderManage/OrderManage';
 import Profile from '@/pages/Profile/Profile';
 import Settings from '@/pages/Setting/Setting';
 import UserManage from '@/pages/UserManage/UserManage';
+import Notification from '@/pages/Notication/Notication';
 import { createBrowserRouter } from 'react-router-dom'
 
 const router = createBrowserRouter([
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
             path: 'certification',
             element: <Certification />
           },
+          {
+            path: 'notification',
+            element: <Notification />
+          }
         ]
       },
       {

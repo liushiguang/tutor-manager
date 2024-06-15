@@ -68,7 +68,7 @@ const UserManage = () => {
         ]
     };
 
-    const chartData = {
+    const teacherChartData = {
         legend: ['Male', 'Female'],
         indicators: [
           { name: 'High School', max: 100 },
@@ -87,7 +87,7 @@ const UserManage = () => {
             value: [60, 70, 80, 70, 65]
           }
         ],
-        colors: ['#5470C6', '#91CC75'] // 颜色数组
+        colors: ['#6CB2EB', '#FF9F7F'] // 自定义颜色
       };
 
     const optionForTeacher = {
@@ -103,8 +103,8 @@ const UserManage = () => {
             trigger: 'item'
           },
           legend: {
-            bottom: 10,
-            data: chartData.legend,
+            bottom: 0,
+            data: teacherChartData.legend,
             textStyle: {
               fontSize: 16,
               color: '#333'
@@ -112,7 +112,7 @@ const UserManage = () => {
           },
           radar: {
             shape: 'circle',
-            indicator: chartData.indicators,
+            indicator: teacherChartData.indicators,
             axisName: {
               color: '#666',
               fontSize: 16
@@ -137,17 +137,95 @@ const UserManage = () => {
           series: [{
             name: '学历分布',
             type: 'radar',
-            data: chartData.series.map((series, index) => ({
+            data: teacherChartData.series.map((series, index) => ({
               value: series.value,
               name: series.name,
               itemStyle: {
-                color: chartData.colors[index]
+                color: teacherChartData.colors[index]
               },
               areaStyle: {
                 opacity: 0.3
               }
             }))
           }]
+        };
+
+        const activityData = [
+          {
+            value: 10,
+            name: '00:00-06:00',
+            itemStyle: {
+              color: 'rgba(255, 99, 132, 0.8)',
+            },
+          },
+          {
+            value: 25,
+            name: '06:00-12:00',
+            itemStyle: {
+              color: 'rgba(54, 162, 235, 0.8)',
+            },
+          },
+          {
+            value: 35,
+            name: '12:00-18:00',
+            itemStyle: {
+              color: 'rgba(255, 206, 86, 0.8)',
+            },
+          },
+          {
+            value: 30,
+            name: '18:00-24:00',
+            itemStyle: {
+              color: 'rgba(75, 192, 192, 0.8)',
+            },
+          },
+        ]
+
+        const optionForActivity = {
+          tooltip: {
+            trigger: 'item',
+            formatter: '{a} <br/>{b} : {c} ({d}%)',
+          },
+          legend: {
+            orient: 'vertical',
+            left: 'left',
+            textStyle: {
+              color: '#333', // 图例文字颜色
+            },
+          },
+          series: [
+            {
+              name: 'User Activity',
+              type: 'pie',
+              radius: ['40%', '70%'],
+              avoidLabelOverlap: false,
+              itemStyle: {
+                borderRadius: 10,
+                borderColor: '#fff',
+                borderWidth: 2,
+              },
+              label: {
+                show: true,
+                position: 'inside',
+                formatter: '{b} : {c} ({d}%)',
+                textStyle: {
+                  fontSize: 14,
+                  fontWeight: 'bold',
+                },
+              },
+              emphasis: {
+                label: {
+                  show: true,
+                  fontSize: '16',
+                  fontWeight: 'bold',
+                },
+              },
+              labelLine: {
+                show: true,
+              },
+              data: activityData,
+            },
+          ],
         };
 
     const perPage = 3;
@@ -159,13 +237,18 @@ const UserManage = () => {
           {/* 用户地区分布图 - 按照不同颜色进行区分 */}
           <div className="flex-1 p-4 bg-white rounded shadow">
             <h2 className="text-xl font-bold mb-4 text-center">User Location Distribution</h2>
-            <ReactEcharts option={optionForLocation} style={{ width: '100%', height: '250px' }} />
+            <ReactEcharts option={optionForLocation} style={{ width: '100%', height: '230px' }} />
           </div>
           {/* 家教教师学历雷达图 - 高中、专科、本科、硕士、博士 - 性别 */}
           <div className="flex-1 p-4 bg-white rounded shadow">
             <h2 className="text-xl font-bold mb-4 text-center">Teacher Education Qualifications Distribution</h2>
-            <ReactEcharts option={optionForTeacher} style={{ width: '100%', height: '250px' }} />
+            <ReactEcharts option={optionForTeacher} style={{ width: '100%', height: '230px' }} />
           </div>
+          {/* 环状图 */}
+          <div className="flex-1 p-4 bg-white rounded shadow">
+            <h2 className="text-xl font-bold mb-4 text-center">User Activity Duration</h2>
+            <ReactEcharts option={optionForActivity} style={{ width: '100%', height: '230px' }} />
+            </div>
         </div>
   
         {/* -----包含用户数据的表格----- */}
