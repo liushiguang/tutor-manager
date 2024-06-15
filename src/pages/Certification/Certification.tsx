@@ -1,9 +1,9 @@
 const Certification = () => {
     return (
-        <>
-        Certification.
-        </>
-    );
+        <div>
+            
+        </div>
+    )
 }
 
 export default Certification;
