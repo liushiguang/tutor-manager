@@ -74,7 +74,7 @@ const SignOnTable = ()=> {
   const [searchTerm, setSearchTerm] = useState("")
   const [signons, setSignOns] = useState<signon[]>([])
   const [currentPage, setCurrentPage] = useState(1)
-  const [signonsPerPage] = useState(10)
+  const [signonsPerPage] = useState(6)
   const [isEditing, setIsEditing] = useState(false)
   const [editingSignOn, setEditingSignOn] = useState<signon>(iniSignOn)
   

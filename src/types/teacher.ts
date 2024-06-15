@@ -1,12 +1,8 @@
 export interface teacher {
-    id: number,
-    username: string,
-    email: string,
-    address: string,
-    gender: string,
-    profile: string,
+    uid: number,
     content: string,
+    username: string,
     location: string,
     education: string,
-    salary: number
+    salary: number,
 }

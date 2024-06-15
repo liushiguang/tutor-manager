@@ -84,7 +84,7 @@ const EditForm = (props: any) => {
   )
 }
 
-const StuInfoTable = ()=> {
+const UserInfoTable = ()=> {
     const iniStudent: student = {
         id: -1,
         account: "",
@@ -280,4 +280,4 @@ const StuInfoTable = ()=> {
   )
 }
 
-export default StuInfoTable;
+export default UserInfoTable;

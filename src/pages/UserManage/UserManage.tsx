@@ -26,16 +26,17 @@ const UserManage = () => {
                     <div role="tabpanel" className="tab-content p-10">
                         <SignOnTable />
                     </div>
-                    
-                    <input type="radio" name="my_tabs_1" role="tab" className="tab" aria-label="Student Table" />
-                    <div role="tabpanel" className="tab-content p-10">
-                        <StuInfoTable />
-                    </div>
 
                     <input type="radio" name="my_tabs_1" role="tab" className="tab" aria-label="Teacher Table"/>
                     <div role="tabpanel" className="tab-content p-10">
-                        {/* <TeacherInfoTable /> */}
+                        <TeacherInfoTable />
                     </div>
+                    
+                    <input type="radio" name="my_tabs_1" role="tab" className="tab" aria-label="Student Table" />
+                    <div role="tabpanel" className="tab-content p-10">
+                        <UserInfoTable />
+                    </div>
+
                 </div>
             </div>       
         </div>
