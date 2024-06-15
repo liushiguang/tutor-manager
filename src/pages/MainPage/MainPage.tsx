@@ -48,13 +48,13 @@ const Sidebar = () => {
                         Certification
                     </button>
                 </li>
-                <li className='text-center'>
+                {/* <li className='text-center'>
                     <button className='w-full btn btn-outline glass btn-xs sm:btn-sm md:btn-md lg:btn-lg text-neutral-500 hover:scale-105' 
                         onClick={() => navigate('/notification')}>
                         <img src={notificationicon} className='w-6' />
                         Notification
                     </button>
-                </li>
+                </li> */}
                 {/* <li className='text-center'>
                     <button className='w-full btn btn-outline glass btn-xs sm:btn-sm md:btn-md lg:btn-lg text-neutral-500 hover:scale-105' 
                         onClick={() => navigate('/profile')}>
