@@ -1,6 +1,6 @@
 import SignOnTable from "./SignOnTable"
-import StuInfoTable from "./StuInfoTable"
 import TeacherInfoTable from "./TeacherInfoTable"
+import UserInfoTable from "./UserInfoTable"
 
 const UserManage = () => {
     return (
@@ -32,7 +32,7 @@ const UserManage = () => {
                         <TeacherInfoTable />
                     </div>
                     
-                    <input type="radio" name="my_tabs_1" role="tab" className="tab" aria-label="Student Table" />
+                    <input type="radio" name="my_tabs_1" role="tab" className="tab" aria-label="User Table" />
                     <div role="tabpanel" className="tab-content p-10">
                         <UserInfoTable />
                     </div>

@@ -1,9 +1,9 @@
-export interface student {
+export interface user {
     uid: number,
     username: string,
     email: string,
-    type: string,
+    type: number,
     address: string,
-    gender: string,
+    gender: number,
     profile: string,
 }
