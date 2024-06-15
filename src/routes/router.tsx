@@ -1,7 +1,5 @@
 import Certification from '@/pages/Certification/Certification';
 import Dashboard from '@/pages/Dashboard/Dashboard';
-import StuInfoTable from '@/pages/InfoTable/StuInfoTable';
-import TeacherInfoTable from '@/pages/InfoTable/TeacherInfoTable';
 import Login from '@/pages/Login/Login';
 import MainPage from '@/pages/MainPage/MainPage';
 import NotFound from '@/pages/NotFound/NotFound';
@@ -34,17 +32,7 @@ const router = createBrowserRouter([
           },
           {
             path: 'userManage',
-            element: <UserManage />,
-            children: [
-              {
-                path: 'userInfoTable',
-                element: <StuInfoTable />
-              },
-              {
-                path: 'teacherInfoTable',
-                element: <TeacherInfoTable />
-              },
-            ]
+            element: <UserManage />
           },
           {
             path: 'setting',
