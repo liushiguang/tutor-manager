@@ -87,20 +87,22 @@ const EditForm = (props: any) => {
   )
 }
 
-const TeacherInfoTable = ()=> {
-    const iniTeacher: teacher = {
-        uid: -1,
-        content: "",
-        username: "",
-        location: "",
-        education: "",
-        salary: 0,
-      }
+const TeacherInfoTable = (props : any)=> {
+    
+  const { perPage } = props
+  const iniTeacher: teacher = {
+      uid: -1,
+      content: "",
+      username: "",
+      location: "",
+      education: "",
+      salary: 0,
+    }
   
   const [searchTerm, setSearchTerm] = useState("")
   const [teachers, setTeachers] = useState<teacher[]>([])
   const [currentPage, setCurrentPage] = useState(1)
-  const [teachersPerPage] = useState(6)
+  const [teachersPerPage] = useState(perPage)
   const [isEditing, setIsEditing] = useState(false)
   const [editingTeacher, setEditingTeacher] = useState<teacher>(iniTeacher)
   

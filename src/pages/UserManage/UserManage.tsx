@@ -1,45 +1,197 @@
+import { title } from "process";
 import SignOnTable from "./SignOnTable"
 import TeacherInfoTable from "./TeacherInfoTable"
 import UserInfoTable from "./UserInfoTable"
+import ReactEcharts from 'echarts-for-react';
+import { text } from "stream/consumers";
 
 const UserManage = () => {
+
+    const locationCategory: {[key: string]: number} = {
+        "Hunan ChangSha" : 25,
+        "Huber Wuhan" : 15,
+        "Henan ZhengZhou" : 10,
+        "JiangSu NanJing" : 9,
+        "ZheJiang HangZhou" : 5,
+        "BeiJing" : 27,
+        "ShangHai" : 23,
+        "ShenZhen" : 26,
+        "GuangZhou" : 30,
+    }
+    // echarts 饼状图配置项
+    const pieChartData = Object.keys(locationCategory).map((key: string) => ({name: key, value: locationCategory[key]}))
+    const optionForLocation = {
+        title: {
+            // text: 'User Location Distribution',
+            // top: '5%',
+            left: 'center',
+            // 主标题样式
+            textStyle: {
+                fontWeight: 'normal',
+                fontSize: 18
+            },
+        },
+        tooltip: {
+            trigger: 'item',
+            formatter: '{a} <br/>{b}: {c} ({d}%)'
+        },
+        series: [
+            {
+                name: 'Map',
+                type: 'pie',
+                radius: '50%',
+                center: ['50%', '45%'],
+                label: {
+                    formatter: '{b}: {d}%',
+                    fontSize: 14,
+                    fontWeight: 'bold'
+                },
+                labelLine: {
+                    length: 10,
+                    length2: 15
+                },
+                itemStyle: { // 美化每个扇形块的样式
+                    shadowBlur: 10,
+                    shadowOffsetX: 0,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                },
+                emphasis: { // 高亮样式
+                    itemStyle: {
+                        shadowBlur: 20,
+                        shadowColor: 'rgba(0, 0, 0, 0.8)'
+                    }
+                },
+                data: pieChartData,
+                // 添加颜色配置
+                color: ['#5470C6', '#91CC75', '#FAC858', '#EE6666', '#73C0DE', '#3BA272', '#FC8452', '#9A60B4', '#EA7CCC']
+            }
+        ]
+    };
+
+    const chartData = {
+        legend: ['Male', 'Female'],
+        indicators: [
+          { name: 'High School', max: 100 },
+          { name: 'Associate Degree', max: 100 },
+          { name: "Bachelor's Degree", max: 100 },
+          { name: "Master's Degree", max: 100 },
+          { name: "Doctoral Degree", max: 100 }
+        ],
+        series: [
+          {
+            name: 'Male',
+            value: [70, 80, 90, 85, 75]
+          },
+          {
+            name: 'Female',
+            value: [60, 70, 80, 70, 65]
+          }
+        ],
+        colors: ['#5470C6', '#91CC75'] // 颜色数组
+      };
+
+    const optionForTeacher = {
+        title: {
+            // text: '家教教师学历雷达图',
+            left: 'center',
+            textStyle: {
+              fontSize: 24,
+              color: '#333'
+            }
+          },
+          tooltip: {
+            trigger: 'item'
+          },
+          legend: {
+            bottom: 10,
+            data: chartData.legend,
+            textStyle: {
+              fontSize: 16,
+              color: '#333'
+            }
+          },
+          radar: {
+            shape: 'circle',
+            indicator: chartData.indicators,
+            axisName: {
+              color: '#666',
+              fontSize: 16
+            },
+            splitLine: {
+              lineStyle: {
+                color: ['#ddd', '#ccc', '#bbb', '#aaa', '#999'],
+                width: 1
+              }
+            },
+            splitArea: {
+              areaStyle: {
+                color: ['rgba(255, 255, 255, 0.5)', 'rgba(200, 200, 200, 0.5)']
+              }
+            },
+            axisLine: {
+              lineStyle: {
+                color: '#bbb'
+              }
+            }
+          },
+          series: [{
+            name: '学历分布',
+            type: 'radar',
+            data: chartData.series.map((series, index) => ({
+              value: series.value,
+              name: series.name,
+              itemStyle: {
+                color: chartData.colors[index]
+              },
+              areaStyle: {
+                opacity: 0.3
+              }
+            }))
+          }]
+        };
+
+    const perPage = 3;
+
     return (
-        <div className="flex flex-col">
-            {/* -----显示大致的统计信息----- */}
-            {/* 用户地区分布图
-                - 按照不同颜色进行区分 */}
-            {/* 家教教师学历雷达图 
-                - 高中、专科、本科、硕士、博士 
-                - 性别 */}
-            <div>
-                information table;
-            </div>
-            {/* -----包含用户数据的表格----- */}
-            {/* - 根据用户的用户名进行查找 */}
-            {/* + 根据教师和学生进行筛选 */}
-            {/* - 根据性别进行筛选 */}
-            {/* + 根据地区进行筛选*/}
-            {/* - 修改用户的所有字段的信息 */}
-            <div>
-                <div role="tablist" className="tabs tabs-lifted">
-                    <input type="radio" name="my_tabs_1" role="tab" className="tab" aria-label="SignOn Table" checked />
-                    <div role="tabpanel" className="tab-content p-10">
-                        <SignOnTable />
-                    </div>
-
-                    <input type="radio" name="my_tabs_1" role="tab" className="tab" aria-label="Teacher Table"/>
-                    <div role="tabpanel" className="tab-content p-10">
-                        <TeacherInfoTable />
-                    </div>
-                    
-                    <input type="radio" name="my_tabs_1" role="tab" className="tab" aria-label="User Table" />
-                    <div role="tabpanel" className="tab-content p-10">
-                        <UserInfoTable />
-                    </div>
-
-                </div>
-            </div>       
+        <div className="flex flex-col p-4 space-y-4">
+        {/* -----显示大致的统计信息----- */}
+        <div className="flex flex-row justify-evenly space-x-4">
+          {/* 用户地区分布图 - 按照不同颜色进行区分 */}
+          <div className="flex-1 p-4 bg-white rounded shadow">
+            <h2 className="text-xl font-bold mb-4 text-center">User Location Distribution</h2>
+            <ReactEcharts option={optionForLocation} style={{ width: '100%', height: '250px' }} />
+          </div>
+          {/* 家教教师学历雷达图 - 高中、专科、本科、硕士、博士 - 性别 */}
+          <div className="flex-1 p-4 bg-white rounded shadow">
+            <h2 className="text-xl font-bold mb-4 text-center">Teacher Education Qualifications Distribution</h2>
+            <ReactEcharts option={optionForTeacher} style={{ width: '100%', height: '250px' }} />
+          </div>
         </div>
+  
+        {/* -----包含用户数据的表格----- */}
+        <div className="bg-white rounded shadow">
+          <div role="tablist" className="tabs tabs-lifted">
+            <input type="radio" name="my_tabs_1" id="tab1" role="tab" 
+                className="tab font-sans font-bold text-base" aria-label="SignOn Table" defaultChecked />
+            <div role="tabpanel" className="tab-content p-4">
+              <SignOnTable perPage={perPage}/>
+            </div>
+  
+            <input type="radio" name="my_tabs_1" id="tab2" role="tab" 
+                className="tab font-sans font-bold text-base" aria-label="Teacher Table" />
+            <div role="tabpanel" className="tab-content p-4 hidden">
+              <TeacherInfoTable perPage={perPage}/>
+            </div>
+
+            <input type="radio" name="my_tabs_1" id="tab3" role="tab" 
+                className="tab font-sans font-bold text-base" aria-label="User Table" />
+            <div role="tabpanel" className="tab-content p-4 hidden">
+              <UserInfoTable perPage={perPage}/>
+            </div>
+
+          </div>
+        </div>
+      </div>
     )
 }
 

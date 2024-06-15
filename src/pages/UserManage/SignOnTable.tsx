@@ -63,7 +63,9 @@ const EditForm = (props: any) => {
   )
 }
 
-const SignOnTable = ()=> {
+const SignOnTable = (props: any)=> {
+
+    const { perPage } = props
     const iniSignOn: signon = {
         uid: -1,
         account: "",
@@ -74,7 +76,7 @@ const SignOnTable = ()=> {
   const [searchTerm, setSearchTerm] = useState("")
   const [signons, setSignOns] = useState<signon[]>([])
   const [currentPage, setCurrentPage] = useState(1)
-  const [signonsPerPage] = useState(6)
+  const [signonsPerPage] = useState(perPage)
   const [isEditing, setIsEditing] = useState(false)
   const [editingSignOn, setEditingSignOn] = useState<signon>(iniSignOn)
   

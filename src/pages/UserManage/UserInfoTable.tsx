@@ -98,20 +98,21 @@ const EditForm = (props: any) => {
   )
 }
 
-const UserInfoTable = ()=> {
-    const iniUser: user = {
-        uid: -1,
-        username: "",
-        email: "",
-        type: 0,
-        address: "",
-        gender: 0,
-        profile: "",
-    }
+const UserInfoTable = (props : any)=> {
+  const { perPage } = props
+  const iniUser: user = {
+      uid: -1,
+      username: "",
+      email: "",
+      type: 0,
+      address: "",
+      gender: 0,
+      profile: "",
+  }
   const [searchTerm, setSearchTerm] = useState("")
   const [users, setUsers] = useState<user[]>([])
   const [currentPage, setCurrentPage] = useState(1)
-  const [usersPerPage] = useState(6)
+  const [usersPerPage] = useState(perPage)
   const [isEditing, setIsEditing] = useState(false)
   const [editingUser, setEditingUser] = useState<user>(iniUser)
   
