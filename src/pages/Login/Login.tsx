@@ -38,11 +38,13 @@ const Login = () => {
         }
 
         // 发送登录请求
-        const response = await axiosInstance.post('/administrators/account', administrator)
+        const response = await axiosInstance.post('/administrator/account', administrator)
 
-        // 获取响应码
-        const resCode = response.data.code
-        if (resCode === 200) {
+        const resData = response.data
+
+        console.log(resData)
+
+        if (resData !== "") {
             console.log('登录成功')
             
             // 跳转到主页
@@ -88,7 +90,7 @@ const Login = () => {
                     <h1>登录</h1>
                     <div className="login-form">
                         <div className="username form-item">
-                            <span>使用账号、手机号</span>
+                            <span>使用账号、邮箱</span>
                             <input 
                                 type="text"
                                 name='account'

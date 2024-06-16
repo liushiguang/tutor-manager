@@ -1,9 +1,9 @@
 import axiosInstance from "@/apis/axiosConfig"
 
-const Uid2Name = (uid: number) => {
+const uid2Name = (uid: number) => {
     axiosInstance.get(`/user/name/${uid}`).then((res) => {
-        return res.data.data.username
+        return res.data.data
     }) 
 }
 
-export {Uid2Name}
+export {uid2Name}

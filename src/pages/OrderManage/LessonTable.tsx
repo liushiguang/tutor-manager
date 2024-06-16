@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import axiosInstance from '@/apis/axiosConfig';
 import classNames from 'classnames';
 import { lesson } from '@/types/lesson';
+// import { uid2Name } from '@/utils/Utils';
 
 const EditForm = (props: any) => {
   const { lesson, onChange, onSave, onCancel } = props
