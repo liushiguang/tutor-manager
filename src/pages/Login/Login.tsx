@@ -59,9 +59,9 @@ const Login = () => {
                 account: '',
             }
 
-            const response = await axiosInstance.post('/administrators/email', administrator)
-            const resCode = response.data.code
-            if (resCode === 200) {
+            const response = await axiosInstance.post('/administrator/email', administrator)
+            const resCode = response.data
+            if (resCode !== "") {
                 console.log('登录成功')
                 
                 // 跳转到主页

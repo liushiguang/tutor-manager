@@ -3,6 +3,7 @@ import axios from 'axios';
 import { user } from '@/types/user';
 import axiosInstance from '@/apis/axiosConfig';
 import classNames from 'classnames';
+import CustomAlert,{INFO_LEVEL, SUCCESS_LEVEL, WARNING_LEVEL, ERROR_LEVEL} from '@/components/CustomAlert/CustomAlert';
 
 const EditForm = (props: any) => {
   const { user, onChange, onSave, onCancel } = props
@@ -115,7 +116,10 @@ const UserInfoTable = (props : any)=> {
   const [usersPerPage] = useState(perPage)
   const [isEditing, setIsEditing] = useState(false)
   const [editingUser, setEditingUser] = useState<user>(iniUser)
-  
+  const [showAlert, setShowAlert] = useState(false)
+  const [alertMsg, setAlertMsg] = useState("")
+  const [alertLevel, setAlertLevel] = useState(0)
+
 
   // 获取用户信息,并设置users数组,以显示在页面上,依赖于currentPage和usersPerPage
   useEffect(() => {
@@ -157,6 +161,23 @@ const UserInfoTable = (props : any)=> {
 
   const handleSearch = (userName: string) => {
     const searchedUsers = users.filter((item: user) => item.username === userName)
+
+    if (searchedUsers.length === 0) {
+      setShowAlert(true)
+      setAlertMsg("未找到匹配的登录信息")
+      setAlertLevel(ERROR_LEVEL)
+      setInterval(() => {
+        setShowAlert(false)
+      }, 3000)
+    } else {
+      setShowAlert(true)
+      setAlertMsg("查询成功")
+      setAlertLevel(SUCCESS_LEVEL)
+      setInterval(() => {
+        setShowAlert(false)
+      }, 3000) 
+    }
+
     setUsers(searchedUsers)
   }
 
@@ -181,6 +202,14 @@ const UserInfoTable = (props : any)=> {
     // 如果请求成功，则更新currentUsers数组
     if (response.data.code === 200) {
       setUsers(users.map((item: user) => item.uid === editingUser.uid ? editingUser : item))
+
+      setShowAlert(true)
+      setAlertMsg("更新成功")
+      setAlertLevel(SUCCESS_LEVEL)
+      setInterval(() => {
+        setShowAlert(false)
+      }, 3000)
+
     }
     // 关闭编辑框
     setIsEditing(false)
@@ -264,6 +293,9 @@ const UserInfoTable = (props : any)=> {
           </table>
           {
             isEditing && <EditForm user={editingUser} onChange={handleInputChange} onSave={handleSaveUser} onCancel={handleCancelEdit}/>         
+          }
+          {
+            showAlert && <CustomAlert msg={alertMsg} level={alertLevel} />
           }
     </div>
   )

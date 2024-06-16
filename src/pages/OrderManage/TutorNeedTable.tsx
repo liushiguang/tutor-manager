@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axiosInstance from '@/apis/axiosConfig';
 import { tutor } from '@/types/tutor';
+import CustomAlert,{INFO_LEVEL, ERROR_LEVEL, SUCCESS_LEVEL, WARNING_LEVEL} from '@/components/CustomAlert/CustomAlert';
 
 const EditForm = (props: any) => {
   const { tutor, onChange, onSave, onCancel } = props
@@ -140,6 +141,9 @@ const TutorNeedTable = (props : any)=> {
   const [tutorsPerPage] = useState(perPage)
   const [isEditing, setIsEditing] = useState(false)
   const [editingTutor, setEditingTutor] = useState<tutor>(iniTutor)
+  const [showAlert, setShowAlert] = useState(false)
+  const [alertMsg, setAlertMsg] = useState("")
+  const [alertLevel, setAlertLevel] = useState(0)
 
   // 获取家教需求信息,并设置tutors数组,以显示在页面上,依赖于currentPage和tutorsPerPage
   useEffect(() => {
@@ -181,6 +185,23 @@ const TutorNeedTable = (props : any)=> {
 
   const handleSearch = (username: string) => {
     const searchedTutors = tutors.filter((item: tutor) => item.username === username)
+
+    if (searchedTutors.length === 0) {
+      setShowAlert(true)
+      setAlertMsg("未找到匹配的登录信息")
+      setAlertLevel(ERROR_LEVEL)
+      setInterval(() => {
+        setShowAlert(false)
+      }, 3000)
+    } else {
+      setShowAlert(true)
+      setAlertMsg("查询成功")
+      setAlertLevel(SUCCESS_LEVEL)
+      setInterval(() => {
+        setShowAlert(false)
+      }, 3000) 
+    }
+
     setTutors(searchedTutors)
   }
 
@@ -294,6 +315,9 @@ const TutorNeedTable = (props : any)=> {
           </table>
           {
             isEditing && <EditForm tutor={editingTutor} onChange={handleInputChange} onSave={handleSaveTutor} onCancel={handleCancelEdit}/>         
+          }
+          {
+            showAlert && <CustomAlert msg={alertMsg} level={alertLevel} />
           }
     </div>
   )

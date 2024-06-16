@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { signon } from '@/types/signon';
 import axios from 'axios';
 import axiosInstance from '@/apis/axiosConfig';
+import CustomAlert,{INFO_LEVEL, SUCCESS_LEVEL, WARNING_LEVEL, ERROR_LEVEL} from '@/components/CustomAlert/CustomAlert';{}
 
 const EditForm = (props: any) => {
   const { signon, onChange, onSave, onCancel } = props
@@ -79,7 +80,10 @@ const SignOnTable = (props: any)=> {
   const [signonsPerPage] = useState(perPage)
   const [isEditing, setIsEditing] = useState(false)
   const [editingSignOn, setEditingSignOn] = useState<signon>(iniSignOn)
-  
+  const [showAlert, setShowAlert] = useState(false)
+  const [alertMsg, setAlertMsg] = useState("")
+  const [alertLevel, setAlertLevel] = useState(0)
+
 
   // 获取登录信息,并设置signons数组,以显示在页面上,依赖于currentPage和signonsPerPage
   useEffect(() => {
@@ -122,6 +126,23 @@ const SignOnTable = (props: any)=> {
 
   const handleSearch = (account: string) => {
     const searchedSignOns = signons.filter((item: signon) => item.account === account)
+
+    if (searchedSignOns.length === 0) {
+      setShowAlert(true)
+      setAlertMsg("未找到匹配的登录信息")
+      setAlertLevel(ERROR_LEVEL)
+      setInterval(() => {
+        setShowAlert(false)
+      }, 3000)
+    } else {
+      setShowAlert(true)
+      setAlertMsg("查询成功")
+      setAlertLevel(SUCCESS_LEVEL)
+      setInterval(() => {
+        setShowAlert(false)
+      }, 3000) 
+    }
+    
     setSignOns(searchedSignOns)
   }
 
@@ -223,6 +244,9 @@ const SignOnTable = (props: any)=> {
           </table>
           {
             isEditing && <EditForm signon={editingSignOn} onChange={handleInputChange} onSave={handleSaveSignOn} onCancel={handleCancelEdit}/>         
+          }
+          {
+            showAlert && <CustomAlert msg={alertMsg} level={alertLevel} />
           }
     </div>
   )

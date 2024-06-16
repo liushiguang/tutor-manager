@@ -3,6 +3,7 @@ import axiosInstance from '@/apis/axiosConfig';
 import classNames from 'classnames';
 import { lesson } from '@/types/lesson';
 // import { uid2Name } from '@/utils/Utils';
+import CustomAlert,{INFO_LEVEL, SUCCESS_LEVEL, ERROR_LEVEL, WARNING_LEVEL} from '@/components/CustomAlert/CustomAlert';
 
 const EditForm = (props: any) => {
   const { lesson, onChange, onSave, onCancel } = props
@@ -71,6 +72,9 @@ const LessonTable = (props : any)=> {
   const [lessonsPerPage] = useState(perPage)
   const [isEditing, setIsEditing] = useState(false)
   const [editingLesson, setEditingLesson] = useState<lesson>(iniLesson)
+  const [showAlert, setShowAlert] = useState(false)
+  const [alertMsg, setAlertMsg] = useState("")
+  const [alertLevel, setAlertLevel] = useState(0)
 
   // 获取课程信息,并设置lessons数组,以显示在页面上,依赖于currentPage和lessonsPerPage
   useEffect(() => {
@@ -112,6 +116,23 @@ const LessonTable = (props : any)=> {
 
   const handleSearch = (studentName: string) => {
     const searchedLessons = lessons.filter((item: lesson) => item.studentName === studentName)
+
+    if (searchedLessons.length === 0) {
+      setShowAlert(true)
+      setAlertMsg("未找到匹配的登录信息")
+      setAlertLevel(ERROR_LEVEL)
+      setInterval(() => {
+        setShowAlert(false)
+      }, 3000)
+    } else {
+      setShowAlert(true)
+      setAlertMsg("查询成功")
+      setAlertLevel(SUCCESS_LEVEL)
+      setInterval(() => {
+        setShowAlert(false)
+      }, 3000) 
+    }
+
     setLessons(searchedLessons)
   }
 
@@ -215,6 +236,9 @@ const LessonTable = (props : any)=> {
           </table>
           {
             isEditing && <EditForm lesson={editingLesson} onChange={handleInputChange} onSave={handleSaveLesson} onCancel={handleCancelEdit}/>         
+          }
+          {
+            showAlert && <CustomAlert level={alertLevel} message={alertMsg}/>
           }
     </div>
   )

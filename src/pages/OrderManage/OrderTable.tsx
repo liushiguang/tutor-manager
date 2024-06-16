@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import axiosInstance from '@/apis/axiosConfig';
 import classNames from 'classnames';
 import { order } from '@/types/order';
+import CustomAlert,{INFO_LEVEL, SUCCESS_LEVEL, ERROR_LEVEL, WARNING_LEVEL} from '@/components/CustomAlert/CustomAlert';
 
 const EditForm = (props: any) => {
   const { order, onChange, onSave, onCancel } = props
@@ -107,6 +108,9 @@ const OrderTable = (props : any)=> {
   const [ordersPerPage] = useState(perPage)
   const [isEditing, setIsEditing] = useState(false)
   const [editingOrder, setEditingOrder] = useState<order>(iniOrder)
+  const [showAlert, setShowAlert] = useState(false)
+  const [alertMsg, setAlertMsg] = useState("")
+  const [alertLevel, setAlertLevel] = useState(0)
 
   // 获取订单信息,并设置orders数组,以显示在页面上,依赖于currentPage和ordersPerPage
   useEffect(() => {
@@ -148,6 +152,23 @@ const OrderTable = (props : any)=> {
 
   const handleSearch = (address: string) => {
     const searchedOrders = orders.filter((item: order) => item.address === address)
+
+    if (searchedOrders.length === 0) {
+      setShowAlert(true)
+      setAlertMsg("未找到匹配的登录信息")
+      setAlertLevel(ERROR_LEVEL)
+      setInterval(() => {
+        setShowAlert(false)
+      }, 3000)
+    } else {
+      setShowAlert(true)
+      setAlertMsg("查询成功")
+      setAlertLevel(SUCCESS_LEVEL)
+      setInterval(() => {
+        setShowAlert(false)
+      }, 3000) 
+    }
+    
     setOrders(searchedOrders)
   }
 
@@ -261,6 +282,9 @@ const OrderTable = (props : any)=> {
           </table>
           {
             isEditing && <EditForm order={editingOrder} onChange={handleInputChange} onSave={handleSaveOrder} onCancel={handleCancelEdit}/>         
+          }
+          {
+            showAlert && <CustomAlert msg={alertMsg} level={alertLevel} />
           }
     </div>
   )

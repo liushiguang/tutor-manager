@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { teacher } from '@/types/teacher';
 import axiosInstance from '@/apis/axiosConfig';
+import CustomAlert,{INFO_LEVEL, SUCCESS_LEVEL, WARNING_LEVEL, ERROR_LEVEL} from '@/components/CustomAlert/CustomAlert';
 
 const EditForm = (props: any) => {
   const { teacher, onChange, onSave, onCancel } = props
@@ -105,7 +106,10 @@ const TeacherInfoTable = (props : any)=> {
   const [teachersPerPage] = useState(perPage)
   const [isEditing, setIsEditing] = useState(false)
   const [editingTeacher, setEditingTeacher] = useState<teacher>(iniTeacher)
-  
+  const [showAlert, setShowAlert] = useState(false)
+  const [alertMsg, setAlertMsg] = useState("")
+  const [alertLevel, setAlertLevel] = useState(0)
+
 
   // 获取教师信息,并设置teachers数组,以显示在页面上,依赖于currentPage和teachersPerPage
   useEffect(() => {
@@ -147,6 +151,23 @@ const TeacherInfoTable = (props : any)=> {
 
   const handleSearch = (teacherName: string) => {
     const searchedTeachers = teachers.filter((item: teacher) => item.username === teacherName)
+   
+    if (searchedTeachers.length === 0) {
+      setShowAlert(true)
+      setAlertMsg("未找到匹配的登录信息")
+      setAlertLevel(ERROR_LEVEL)
+      setInterval(() => {
+        setShowAlert(false)
+      }, 3000)
+    } else {
+      setShowAlert(true)
+      setAlertMsg("查询成功")
+      setAlertLevel(SUCCESS_LEVEL)
+      setInterval(() => {
+        setShowAlert(false)
+      }, 3000) 
+    }
+
     setTeachers(searchedTeachers)
   }
 
@@ -252,6 +273,9 @@ const TeacherInfoTable = (props : any)=> {
           </table>
           {
             isEditing && <EditForm teacher={editingTeacher} onChange={handleInputChange} onSave={handleSaveTeacher} onCancel={handleCancelEdit}/>         
+          }
+          {
+            showAlert && <CustomAlert msg={alertMsg} level={alertLevel} />
           }
     </div>
   )

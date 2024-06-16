@@ -296,9 +296,7 @@ export const Certification = () => {
             }
             {
                 showAlert && 
-                <div className='absolute top-0 right-0 p-4'>
-                    <CustomAlert msg={alertMsg} level={alertLevel} />
-                </div>
+                <CustomAlert msg={alertMsg} level={alertLevel} />
             }
             <div className="fixed bottom-0 right-0 p-4 text-xs text-gray-400">
                 <p>&copy; 2024 Certification Review. All rights reserved.</p>
