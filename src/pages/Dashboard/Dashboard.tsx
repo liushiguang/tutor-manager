@@ -99,7 +99,7 @@ const Calendar = () => {
 
 
 const TeacherCard = (props : any) => {
-    const {teacherName, teacherRank, teacherAvatar, teacherEducation} = props
+    const {teacherName, teacherRank, teacherEducation} = props
     return (
         <div className='flex flex-col text-center border-4 rounded-2xl overflow-auto border-b-indigo-500'>
             {/* 头像 */}
@@ -323,7 +323,7 @@ const Dashboard = () => {
         }
         return generatedLogs;
     };
-    const [logs, setLogs] = useState(generateLogs());
+    const [logs] = useState(generateLogs());
     const [currentPage, setCurrentPage] = useState(0);
     
     // 计算总页数
