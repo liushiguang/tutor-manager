@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import axiosInstance from '@/apis/axiosConfig';
-import classNames from 'classnames';
 import { order } from '@/types/order';
-import CustomAlert,{INFO_LEVEL, SUCCESS_LEVEL, ERROR_LEVEL, WARNING_LEVEL} from '@/components/CustomAlert/CustomAlert';
+import CustomAlert,{SUCCESS_LEVEL, ERROR_LEVEL} from '@/components/CustomAlert/CustomAlert';
 
 const EditForm = (props: any) => {
   const { order, onChange, onSave, onCancel } = props

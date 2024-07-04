@@ -1,9 +1,7 @@
-import { title } from "process";
 import SignOnTable from "./SignOnTable"
 import TeacherInfoTable from "./TeacherInfoTable"
 import UserInfoTable from "./UserInfoTable"
 import ReactEcharts from 'echarts-for-react';
-import { text } from "stream/consumers";
 
 const UserManage = () => {
 

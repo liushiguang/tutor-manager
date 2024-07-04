@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axiosInstance from '@/apis/axiosConfig';
 import { certification } from '@/types/certification';
-import CustomAlert,{INFO_LEVEL, SUCCESS_LEVEL, ERROR_LEVEL, WARNING_LEVEL} from '@/components/CustomAlert/CustomAlert';
+import CustomAlert,{INFO_LEVEL, SUCCESS_LEVEL, ERROR_LEVEL} from '@/components/CustomAlert/CustomAlert';
 
 const EditForm = (props: any) => {
     const { certification, onChange, onApprove, onDisapprove } = props

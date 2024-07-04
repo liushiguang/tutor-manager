@@ -6,7 +6,7 @@ import { administrator } from '@/types/administrator'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axiosInstance from '@/apis/axiosConfig'
-import CustomAlert,{INFO_LEVEL, WARNING_LEVEL, ERROR_LEVEL, SUCCESS_LEVEL} from '@/components/CustomAlert/CustomAlert'
+import CustomAlert,{INFO_LEVEL, ERROR_LEVEL} from '@/components/CustomAlert/CustomAlert'
 
 
 const Login = () => {

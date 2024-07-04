@@ -3,9 +3,6 @@ import dashicon from '@/resources/backstage/dashboard.svg';
 import usericon from '@/resources/backstage/user.svg';
 import ordericon from '@/resources/backstage/order.svg';
 import certicon from '@/resources/backstage/certification.svg';
-import settingicon from '@/resources/backstage/setting.svg';
-import profileicon from '@/resources/backstage/profile.svg';
-import notificationicon from '@/resources/backstage/notification.svg';
 import logo from '@/resources/backstage/Puad.png';
 
 const Sidebar = () => {

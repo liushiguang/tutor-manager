@@ -6,7 +6,6 @@ import { format, getDay, startOfMonth, endOfMonth, eachDayOfInterval, isSameMont
 import classNames from 'classnames';
 import { useState } from 'react';
 import ReactEcharts from 'echarts-for-react';
-import { color } from 'echarts';
 
 interface SystemLog {
     id: number;
